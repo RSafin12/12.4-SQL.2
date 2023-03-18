@@ -9,3 +9,5 @@ INNER JOIN address a  ON staff.address_id = a.address_id
 INNER JOIN customer c ON s.store_id = c.store_id
 GROUP BY s.store_id, worker, a.address;
 ```
+Результат
+![Результат](https://github.com/RSafin12/12.4-SQL.2/blob/main/1st.png)
