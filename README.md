@@ -25,5 +25,17 @@ FROM payment p
 INNER JOIN rental r ON p.rental_id = r.rental_id
 GROUP BY Месяц
 HAVING Max_Sum = (SELECT MAX(amount) FROM payment p);
+```
 
+## Задание 4
+```
+SELECT p.staff_id, CONCAT(s.first_name, ' ', s.last_name) as worker, COUNT(payment_id),
+CASE
+	WHEN COUNT(payment_id) > 8000 THEN 'Yes'
+	WHEN COUNT(payment_id) < 8000 THEN 'NO'
+	ELSE 'equal'
+END AS prem
+FROM payment p
+INNER JOIN staff s ON p.staff_id = s.staff_id
+GROUP BY p.staff_id;
 ```
