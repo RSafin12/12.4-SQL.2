@@ -2,14 +2,14 @@
 
 ## Задание 1
 ```
-SELECT s.store_id, CONCAT(staff.first_name, ' ', staff.last_name) AS worker, staff_id,  c2.city, MAX(c.customer_id)
+SELECT s.store_id, CONCAT(staff.first_name, ' ', staff.last_name) AS worker, staff_id,  c2.city, COUNT(c.customer_id)
 FROM store s
 INNER JOIN staff ON s.store_id = staff.store_id
 INNER JOIN address a  ON staff.address_id = a.address_id
 INNER JOIN city c2 ON a.city_id = c2.city_id
 INNER JOIN customer c ON s.store_id = c.store_id
 GROUP BY s.store_id, worker, staff_id, c2.city
-HAVING MAX(c.customer_id) > 300;
+HAVING COUNT(c.customer_id) > 300;
 ```
 ## Задание 2
 ```
@@ -20,11 +20,11 @@ WHERE `length`  > (SELECT AVG(`length`) FROM film f);
 
 ## Задание 3
 ```
-SELECT MONTH(CAST(payment_date as DATE)) as Месяц, MAX(amount) AS Max_Sum, COUNT(r.rental_id) AS Rent_per_month
+SELECT DATE_FORMAT(payment_date, '%M,%Y')  AS `Month of the date`, SUM(amount) AS Max_Sum, COUNT(r.rental_id) AS Rent_per_month
 FROM payment p
 INNER JOIN rental r ON p.rental_id = r.rental_id
-GROUP BY Месяц
-HAVING Max_Sum = (SELECT MAX(amount) FROM payment p);
+GROUP BY `Month of the date`
+Order by Max_Sum DESC LIMIT 1
 ```
 
 ## Задание 4
